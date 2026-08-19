@@ -1,16 +1,23 @@
 //expenses array stores all the expenses
 let expenses=[];
+
 const expenseList=document.getElementById("expense-list");
 const expenseForm=document.getElementById("expense-form");
+const totalSpent=document.getElementById("total-spent");
 
 function displayExpenses(){
     //clears what was previously on display and then shows the current state of the list
     expenseList.innerHTML="";
-
+    let total=0;
     expenses.forEach(function(expense){
+        //Number() converts the amount from string to number as .value gives a string regardless of the input
+        total+=Number(expense.amount);
+        //for every element there is a new div created and we show the text content in each div
         const expenseItem=document.createElement("div");
         expenseItem.textContent = `${expense.description} - ₹${expense.amount}`;
+        //append child adds the expense item to the expense list and then we can show the expense 
         expenseList.appendChild(expenseItem);
+        totalSpent.textContent=`₹${total}`;//template literal string
     });
 }
 
