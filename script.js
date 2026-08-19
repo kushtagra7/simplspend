@@ -1,13 +1,28 @@
 //expenses array stores all the expenses
 let expenses=[];
-let startingMoney=15000;
-let nextPaymentDate = new Date("2026-09-01");
+let startingMoney;
+let nextPaymentDate;
 
 const expenseList=document.getElementById("expense-list");
 const expenseForm=document.getElementById("expense-form");
 const totalSpent=document.getElementById("total-spent");
 const moneyLeft=document.getElementById("money-left");
 const daysLeft=document.getElementById("days-left");
+
+const setupSection=document.getElementById("setup");
+const setupButton = document.getElementById("setup-btn");
+const startingMoneyInput = document.getElementById("starting-money");
+const nextPaymentInput = document.getElementById("next-payment");
+//setting up the continue button so that it saves the input giver by the user
+setupButton.addEventListener("click",function(){
+    const money= startingMoneyInput.value;
+    const paymentDate=nextPaymentInput.value;
+    startingMoney=Number(money);
+    nextPaymentDate=new Date(paymentDate);
+    console.log(startingMoney);
+    console.log(nextPaymentDate);
+    displayExpenses();
+});
 
 function displayExpenses(){
     //clears what was previously on display and then shows the current state of the list
