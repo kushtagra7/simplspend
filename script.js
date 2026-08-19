@@ -1,9 +1,13 @@
 //expenses array stores all the expenses
 let expenses=[];
+let startingMoney=15000;
+let nextPaymentDate = new Date("2026-09-01");
 
 const expenseList=document.getElementById("expense-list");
 const expenseForm=document.getElementById("expense-form");
 const totalSpent=document.getElementById("total-spent");
+const moneyLeft=document.getElementById("money-left");
+const daysLeft=document.getElementById("days-left");
 
 function displayExpenses(){
     //clears what was previously on display and then shows the current state of the list
@@ -17,8 +21,16 @@ function displayExpenses(){
         expenseItem.textContent = `${expense.description} - ₹${expense.amount}`;
         //append child adds the expense item to the expense list and then we can show the expense 
         expenseList.appendChild(expenseItem);
-        totalSpent.textContent=`₹${total}`;//template literal string
     });
+    totalSpent.textContent=`₹${total}`;//template literal string
+    const remaining=startingMoney-total;
+    moneyLeft.textContent=`₹${remaining}`;
+    const today=new Date();
+    const difference=nextPaymentDate - today;
+    const days=Math.ceil(difference/(1000*60*60*24));
+    //difference gives in milliseconds so 1000 for sec 60 for mins and hour and 24 for day
+    daysLeft.textContent=days;
+
 }
 
 expenseForm.addEventListener("submit",function(event){
@@ -46,5 +58,5 @@ expenseForm.addEventListener("submit",function(event){
     expenses.push(expense);
     displayExpenses();
     
-
 });
+displayExpenses();
