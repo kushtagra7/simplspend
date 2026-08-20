@@ -8,6 +8,7 @@ const expenseForm=document.getElementById("expense-form");
 const totalSpent=document.getElementById("total-spent");
 const moneyLeft=document.getElementById("money-left");
 const daysLeft=document.getElementById("days-left");
+const totalExpenses=document.getElementById("total-expenses");
 
 const setupSection=document.getElementById("setup");
 const setupButton = document.getElementById("setup-btn");
@@ -54,13 +55,25 @@ function displayExpenses(){
         expenseList.appendChild(expenseItem);
     });
     totalSpent.textContent=`₹${total}`;//template literal string
-    const remaining=startingMoney-total;
-    moneyLeft.textContent=`₹${remaining}`;
-    const today=new Date();
-    const difference=nextPaymentDate - today;
-    const days=Math.ceil(difference/(1000*60*60*24));
+    totalExpenses.textContent=expenses.length;
+
+    //this is done so that the page doesnt show NaN when there is nothing set up already
+    if (startingMoney === undefined) {
+        moneyLeft.textContent = "₹0";
+    } else {
+        const remaining = startingMoney - total;
+        moneyLeft.textContent = `₹${remaining}`;
+    }
+
+    if (nextPaymentDate === undefined) {
+        daysLeft.textContent = "0";
+    } else {
+        const today = new Date();
+        const difference = nextPaymentDate - today;
+        const days = Math.ceil(difference / (1000 * 60 * 60 * 24));
+        daysLeft.textContent = days;
+    }
     //difference gives in milliseconds so 1000 for sec 60 for mins and hour and 24 for day
-    daysLeft.textContent=days;
 
 }
 
