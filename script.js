@@ -17,11 +17,27 @@ const nextPaymentInput = document.getElementById("next-payment");
 setupButton.addEventListener("click",function(){
     const money= startingMoneyInput.value;
     const paymentDate=nextPaymentInput.value;
+    
+    //basic validation step that checks if the user has clicked continue without entering any data
+    if (money === "" || paymentDate === "" || Number(money) <= 0) {
+        alert("Please enter valid starting money and a payment date.");
+        return;
+    }
+
+    const selectedDate = new Date(paymentDate);
+    const today = new Date(); 
+    //new Date() contains the current time, not just today's date.
+    today.setHours(0, 0, 0, 0);
+    if (selectedDate < today) {
+        alert("Next payment date cannot be in the past.");
+        return;
+    }
+
     startingMoney=Number(money);
     nextPaymentDate=new Date(paymentDate);
-    console.log(startingMoney);
-    console.log(nextPaymentDate);
     displayExpenses();
+    setupSection.style.display="none";
+    //set this element's CSS display property to none.
 });
 
 function displayExpenses(){
