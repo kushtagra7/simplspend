@@ -2,6 +2,20 @@
 let expenses=[];
 let startingMoney;
 let nextPaymentDate;
+//when the page reloads we need to get the item that was saved in local storage so we use getItem()
+const savedExpenses=localStorage.getItem("expenses");//get the item that has the key expenses
+if(savedExpenses){
+    // parse() parses the string back into object
+    expenses=JSON.parse(savedExpenses);
+}
+const savedStartingMoney=localStorage.getItem("startingMoney");
+const savedPaymentDate=localStorage.getItem("nextPaymentDate");
+if (savedStartingMoney && savedPaymentDate){
+    startingMoney=Number(savedStartingMoney);
+    nextPaymentDate=new Date(savedPaymentDate);
+    //this one happens when we reload the page so we initally check if there is saved memory and if saved memory exists then the setup is not displayed.
+    setupSection.style.display="none";
+}
 
 const expenseList=document.getElementById("expense-list");
 const expenseForm=document.getElementById("expense-form");
@@ -36,7 +50,12 @@ setupButton.addEventListener("click",function(){
 
     startingMoney=Number(money);
     nextPaymentDate=new Date(paymentDate);
+    //in nextPaymentdate set item paymentDate which means set second one in what comes first while using set item
+    localStorage.setItem("startingMoney", startingMoney);
+    localStorage.setItem("nextPaymentDate",paymentDate)
+
     displayExpenses();
+    //this display none happens when the user successfully completes the setup.
     setupSection.style.display="none";
     //set this element's CSS display property to none.
 });
@@ -100,6 +119,9 @@ expenseForm.addEventListener("submit",function(event){
     };
     //add the expense to the array of expenses
     expenses.push(expense);
+    //json can only accept strings thus we use stringify as we can't directly put that object/array into LocalStorage.
+    localStorage.setItem("expenses",JSON.stringify(expenses));//setItem stores the things
+    //setitem takes 2 things key and values which means expenses is key and stringify expenses is value
     displayExpenses();
     
 });
