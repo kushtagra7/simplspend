@@ -9,8 +9,14 @@
 <body>
     <div class="container">
 
+    <header class="topbar">
         <h1>SimplSpend</h1>
-        <p>Track your money. Understanding your spending.</p>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="history.html">History</a>
+        <a href="ai.html">AI</a>
+    </nav>
+        </header>
         
         <div class="setup" id="setup">
             <h2>Let's set up SimplSpend</h2>
@@ -31,25 +37,25 @@
             <button id="setup-btn">Coninue</button>
         </div>
 
-        <div class="card">
-            <h3>Total Spent</h3>
-            <h2 id="total-spent">₹0</h2>
-        </div>
-        
-        <div class="card">
-            <h3>Money Left</h3>
-            <h2 id="money-left">₹0</h2>
-        </div>
+        <main class="home-hero">
 
-        <div class="card">
-            <h3>Days until the next payment</h3>
-            <h2 id="days-left">0</h2>
-        </div>
+    <p class="eyebrow">Total Spent</p>
 
-        <div class="card">
-            <h3>Total Expenses</h3>
-            <h2 id="total-expenses">0</h2>
-        </div>
+    <h2 id="total-spent">₹0</h2>
+
+    <div class="money-status">
+        <span id="money-left">₹0</span>
+        <span>left</span>
+
+        <span class="separator">•</span>
+
+        <span id="days-left">0</span>
+        <span>days until payment</span>
+    </div>
+
+    <button id="open-expense-btn">+ Add Expense</button>
+
+</main>
 
         <div class="add-expense">
             <h2>Add Expense</h2>

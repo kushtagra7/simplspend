@@ -2,6 +2,19 @@
 let expenses=[];
 let startingMoney;
 let nextPaymentDate;
+
+const expenseList=document.getElementById("expense-list");
+const expenseForm=document.getElementById("expense-form");
+const totalSpent=document.getElementById("total-spent");
+const moneyLeft=document.getElementById("money-left");
+const daysLeft=document.getElementById("days-left");
+//const totalExpenses=document.getElementById("total-expenses");
+
+const setupSection=document.getElementById("setup");
+const setupButton = document.getElementById("setup-btn");
+const startingMoneyInput = document.getElementById("starting-money");
+const nextPaymentInput = document.getElementById("next-payment");
+
 //when the page reloads we need to get the item that was saved in local storage so we use getItem()
 const savedExpenses=localStorage.getItem("expenses");//get the item that has the key expenses
 if(savedExpenses){
@@ -17,17 +30,6 @@ if (savedStartingMoney && savedPaymentDate){
     setupSection.style.display="none";
 }
 
-const expenseList=document.getElementById("expense-list");
-const expenseForm=document.getElementById("expense-form");
-const totalSpent=document.getElementById("total-spent");
-const moneyLeft=document.getElementById("money-left");
-const daysLeft=document.getElementById("days-left");
-const totalExpenses=document.getElementById("total-expenses");
-
-const setupSection=document.getElementById("setup");
-const setupButton = document.getElementById("setup-btn");
-const startingMoneyInput = document.getElementById("starting-money");
-const nextPaymentInput = document.getElementById("next-payment");
 //setting up the continue button so that it saves the input giver by the user
 setupButton.addEventListener("click",function(){
     const money= startingMoneyInput.value;
@@ -69,12 +71,26 @@ function displayExpenses(){
         total+=Number(expense.amount);
         //for every element there is a new div created and we show the text content in each div
         const expenseItem=document.createElement("div");
-        expenseItem.textContent = `${expense.description} - ₹${expense.amount}`;
+        expenseItem.classList.add("expense-item");
+        //this is for just diplaying the price and category expenseItem.textContent = `${expense.description} - ₹${expense.amount}`;
+        //the below code is to show all the description of the expense
+        expenseItem.innerHTML=`
+            <div class="expense-info">
+                <div class="expense-name">${expense.description}</div>
+                <div class="expense-meta">
+                    ${expense.category} · ${expense.date}
+                </div>
+            </div>
+
+            <div class="expense-amount">
+                ₹${expense.amount}
+            </div>
+        `;
         //append child adds the expense item to the expense list and then we can show the expense 
         expenseList.appendChild(expenseItem);
     });
     totalSpent.textContent=`₹${total}`;//template literal string
-    totalExpenses.textContent=expenses.length;
+    //totalExpenses.textContent=expenses.length;
 
     //this is done so that the page doesnt show NaN when there is nothing set up already
     if (startingMoney === undefined) {

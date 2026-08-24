@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    min-height: 100vh;
+    background: #f3f0e8;
+    color: #151515;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container {
+    min-height: 100vh;
+    width: min(92%, 1280px);
+    margin: 0 auto;
+}
+/* ---------- TOPBAR ---------- */
+.topbar {
+    height: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.topbar h1 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+}
+
+.topbar nav {
+    display: flex;
+    gap: 30px;
+}
+
+.topbar nav a {
+    text-decoration: none;
+    color: #747067;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.topbar nav a:hover {
+    color: #151515;
+}
+/* ---------- HOME HERO ---------- */
+.home-hero {
+    min-height: calc(100vh - 88px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transform: translateY(-35px);
+}
+.eyebrow { /*TOTAL SPENT text*/
+    margin-bottom: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #7b776f;
+}
+#total-spent {
+    font-size: clamp(5rem, 13vw, 10rem);
+    font-weight: 400;
+    line-height: 0.9;
+    letter-spacing: -0.08em;
+}
+.money-status {
+    margin-top: 28px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-size: 15px;
+    color: #68645d;
+}
+.separator {
+    opacity: 0.4;
+}
+/* ---------- BUTTON ---------- */
+#open-expense-btn {
+    margin-top: 25px;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 99px;
+    background: #151515;
+    color: #f3f0e8;
+    font-size: 14px;
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+#open-expense-btn:hover {
+    background: #f3f0e8;
+    color: #151515;
+    border-color: #151515;
+    opacity: 0.9;
+}
