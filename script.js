@@ -2,6 +2,7 @@
 let expenses=[];
 let startingMoney;
 let nextPaymentDate;
+let displayedTotal=0;
 
 const expenseList=document.getElementById("expense-list");
 const expenseForm=document.getElementById("expense-form");
@@ -76,6 +77,31 @@ setupButton.addEventListener("click",function(){
     //set this element's CSS display property to none.
 });
 
+function animateTotal(target){
+    const start=displayedTotal;
+    const duration=250;
+    const startTime=performance.now();
+
+    function update(currentTime){
+        const elapsed=currentTime-startTime;
+        const progress=Math.min(elapsed/duration,1);
+
+        const currentValue=Math.floor(
+            start+(target-start)*progress
+        );
+
+        totalSpent.textContent=`₹${currentValue}`; //template literal string
+
+        if(progress<1){
+            requestAnimationFrame(update);
+        }else{
+            displayedTotal=target;
+        }
+    }
+
+    requestAnimationFrame(update);
+}
+
 function displayExpenses(){
     //clears what was previously on display and then shows the current state of the list
     expenseList.innerHTML="";
@@ -103,7 +129,7 @@ function displayExpenses(){
         //append child adds the expense item to the expense list and then we can show the expense 
         expenseList.appendChild(expenseItem);
     });
-    totalSpent.textContent=`₹${total}`;//template literal string
+    animateTotal(total);
     //totalExpenses.textContent=expenses.length;
 
     //this is done so that the page doesnt show NaN when there is nothing set up already
