@@ -34,7 +34,7 @@
                 id="next-payment"
             >
 
-            <button id="setup-btn">Coninue</button>
+            <button id="setup-btn">Continue</button>
         </div>
 
         <main class="home-hero">
@@ -57,41 +57,48 @@
 
 </main>
 
-        <div class="add-expense">
+    <div class="add-expense" id="expense-modal">
+        <div class="expense-modal-content">
+            <button id="close-expense-btn">×</button>
             <h2>Add Expense</h2>
+
             <form id="expense-form">
-            <label for="description">Description</label>
-            <input
-                type="text"
-                id="description"
-                placeholder="What did you spend on?"
-            >
-            <label for="amount">Amount</label>
-            <input 
-                type="number"
-                id="amount"
-                placeholder="How much did you spend?"
-            >
-            <label for="category">Category</label>
-            <select id="category">
-                <option value="">Select a category</option>
+
+                <label for="description">Description</label>
+                <input 
+                    type="text"
+                    id="description"
+                    placeholder="What did you spend on?"
+                >
+                <label for="amount">Amount</label>
+                <input 
+                    type="number"
+                    id="amount"
+                    placeholder="How much did you spend?"
+                >
+                <label for="category">Category</label>
+                <select id="category">
+                    <option value="">Select a category</option>
                     <option value="food">Food</option>
                     <option value="travel">Travel</option>
                     <option value="shopping">Shopping</option>
                     <option value="bills">Bills</option>
                     <option value="entertainment">Entertainment</option>
                     <option value="other">Other</option>
-            </select>
-            <label for="date">Date</label>
-            <input 
-                type="date"
-                id="date"
-            >
-
+                </select>
+                <label for="date">Date</label>
+                <input 
+                    type="date"
+                    id="date"
+                >
             <button id="add-expense-btn">Add Expense</button>
+
             </form>
+
         </div>
 
+    </div>
+    
         <div class="expenses">
             <h2>Recent Expenses</h2>
 
@@ -101,6 +108,7 @@
         </div>
 
     </div>
+    <div id="toast" class="toast">Expense added ✓</div>
     <script src="script.js"></script>
 </body>
 </html>

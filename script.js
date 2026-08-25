@@ -15,6 +15,20 @@ const setupButton = document.getElementById("setup-btn");
 const startingMoneyInput = document.getElementById("starting-money");
 const nextPaymentInput = document.getElementById("next-payment");
 
+const openExpenseButton=document.getElementById("open-expense-btn");
+const addExpenseSection=document.querySelector(".add-expense");
+const closeExpenseButton=document.getElementById("close-expense-btn");
+
+const toast = document.getElementById("toast");
+
+openExpenseButton.addEventListener("click",function(){
+    addExpenseSection.style.display="flex";
+});
+
+closeExpenseButton.addEventListener("click", function(){
+    addExpenseSection.style.display="none";
+});
+
 //when the page reloads we need to get the item that was saved in local storage so we use getItem()
 const savedExpenses=localStorage.getItem("expenses");//get the item that has the key expenses
 if(savedExpenses){
@@ -139,6 +153,11 @@ expenseForm.addEventListener("submit",function(event){
     localStorage.setItem("expenses",JSON.stringify(expenses));//setItem stores the things
     //setitem takes 2 things key and values which means expenses is key and stringify expenses is value
     displayExpenses();
+    //this makes the "expense added" show on the page for some time and then remove it 
+    toast.classList.add("show"); 
+    setTimeout(function() {
+        toast.classList.remove("show");
+    }, 1800);
     
 });
 displayExpenses();

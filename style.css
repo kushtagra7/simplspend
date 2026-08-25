@@ -85,13 +85,16 @@ body {
 #open-expense-btn {
     margin-top: 25px;
     padding: 14px 24px;
-    border: none;
+    border: 1px solid transparent;
     border-radius: 99px;
     background: #151515;
     color: #f3f0e8;
     font-size: 14px;
     cursor: pointer;
     transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
         transform 0.2s ease,
         opacity 0.2s ease;
 }
@@ -100,4 +103,159 @@ body {
     color: #151515;
     border-color: #151515;
     opacity: 0.9;
+}
+/* ---------- ADD EXPENSE SECTION ---------- */
+.add-expense {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+    
+    background: rgba(21, 21, 21, 0.35);
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 1000;
+}
+.expense-modal-content {
+    position: relative;
+
+    width: min(90%, 420px);
+    padding: 32px;
+
+    background: #f7f4ec;
+    border: 1px solid #ded8cc;
+    border-radius: 18px;
+
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.16);
+}
+.expense-modal-content h2 {
+    margin-bottom: 24px;
+
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+}
+.add-expense form{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.add-expense label {
+    margin-top: 8px;
+
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    color: #77736a;
+}
+.add-expense input,
+.add-expense select {
+    width: 100%;
+    padding: 14px 15px;
+
+    border: 1px solid #d8d2c6;
+    border-radius: 12px;
+
+    background: #fffdf8;
+    color: #151515;
+
+    font-size: 14px;
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+.add-expense input:focus,
+.add-expense select:focus {
+    border-color: #8e897f;
+    box-shadow: 0 0 0 3px rgba(142, 137, 127, 0.12);
+}
+#add-expense-btn {
+    margin-top: 18px;
+    padding: 14px;
+
+    border: 1px solid transparent;
+    border-radius: 999px;
+
+    background: #151515;
+    color: #f7f4ec;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+#add-expense-btn:hover {
+    background: #f3f0e8;
+    color: #151515;
+    border-color: #151515;
+    opacity: 0.9;
+}
+#close-expense-btn {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+
+    border: none;
+    background: transparent;
+
+    color: #151515;
+    font-size: 24px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+/* 
+   Add Expense Modal:
+   The modal already exists in the HTML but is hidden by default with display: none.
+   When the user clicks "+ Add Expense", JavaScript changes display to flex.
+   Since the modal uses position: fixed and inset: 0, it covers the full screen.
+   align-items: center and justify-content: center then center the modal content.
+   Clicking the close button changes display back to none.
+*/
+
+.expenses {
+    display: none;
+}
+/*TOAST(INTIMATION THAT THE EXPENSE IS ADDED*/
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 32px;
+
+    transform: translateX(-50%) translateY(20px);
+
+    padding: 12px 18px;
+    border-radius: 999px;
+
+    background: #151515;
+    color: #f7f4ec;
+
+    font-size: 14px;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+
+    z-index: 2000;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }
