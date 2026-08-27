@@ -76,6 +76,29 @@ setupButton.addEventListener("click",function(){
     setupSection.style.display="none";
     //set this element's CSS display property to none.
 });
+/*
+    Animated Total Counter:
+
+    This function smoothly animates the Total Spent value from the previously
+    displayed amount to the new target amount.
+
+    1. displayedTotal stores the last amount shown on screen.
+    2. start is the value the animation begins from.
+    3. duration defines how long the animation lasts in milliseconds.
+    4. performance.now() records the exact time the animation starts.
+    5. update() runs repeatedly on each browser animation frame.
+    6. elapsed calculates how much time has passed since the animation started.
+    7. progress converts that elapsed time into a value between 0 and 1:
+       0 = animation just started, 1 = animation complete.
+    8. currentValue calculates the number that should be displayed at that
+       moment using:
+       start + (target - start) * progress
+    9. Math.floor() keeps the displayed value as a whole number.
+   10. requestAnimationFrame(update) keeps calling update() until progress
+       reaches 1.
+   11. When the animation finishes, displayedTotal is updated to the target
+       so the next animation starts from the current displayed amount.
+*/
 
 function animateTotal(target){
     const start=displayedTotal;
