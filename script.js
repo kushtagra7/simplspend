@@ -79,7 +79,7 @@ setupButton.addEventListener("click",function(){
 
 function animateTotal(target){
     const start=displayedTotal;
-    const duration=250;
+    const duration=400;
     const startTime=performance.now();
 
     function update(currentTime){
