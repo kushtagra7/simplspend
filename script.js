@@ -41,8 +41,10 @@ const savedPaymentDate=localStorage.getItem("nextPaymentDate");
 if (savedStartingMoney && savedPaymentDate){
     startingMoney=Number(savedStartingMoney);
     nextPaymentDate=new Date(savedPaymentDate);
+
     //this one happens when we reload the page so we initally check if there is saved memory and if saved memory exists then the setup is not displayed.
     setupSection.style.display="none";
+    updatePaymentCycle();
 }
 
 //setting up the continue button so that it saves the input giver by the user
@@ -71,6 +73,7 @@ setupButton.addEventListener("click",function(){
     localStorage.setItem("startingMoney", startingMoney);
     localStorage.setItem("nextPaymentDate",paymentDate)
 
+    updatePaymentCycle();
     displayExpenses();
     //this display none happens when the user successfully completes the setup.
     setupSection.style.display="none";
@@ -124,10 +127,53 @@ function animateTotal(target){
 
     requestAnimationFrame(update);
 }
+//this function checks whether the saved payment date has already passed. If it has, it keeps moving that date forward month by month until it reaches the next upcoming payment date, then saves that new date back to localStorage.
+function updatePaymentCycle(){
+    if(!nextPaymentDate){
+        return;
+    }
+    const today=new Date();
+    while(nextPaymentDate<today){
+        //this gets the numerical value of the day
+        const currentDay=nextPaymentDate.getDate();
+        //getMonth() gives the month number but it gives indexes which means it starts from 0 so we increase the count by one for the next payment date
+        nextPaymentDate.setMonth(nextPaymentDate.getMonth()+1);
+
+        //lets say the payment date is 31 jan next date by calc would e=be 31st feb but that doesnt exist so js shifts to 3rd march but that would disrupt the payment
+        //hence the setDate(0) means that it will set the payment to the last date.
+        if(nextPaymentDate.getDate()!==currentDay){
+            nextPaymentDate.setDate(0);
+        }
+    }
+    //this is done for formatting stuff
+    localStorage.setItem(
+        "nextPaymentDate",
+        nextPaymentDate.toISOString().split("T")[0]
+    );
+}
+
+//this function gets the cycle start and end then return the expenses of that cyle
+function getCurrentCycleExpenses(){
+    if(!nextPaymentDate){
+        return [];
+    }
+    const cycleEnd=new Date(nextPaymentDate);//current cycle ends here
+    const cycleStart=new Date(nextPaymentDate);//new creates a new copy 
+    cycleStart.setMonth(cycleStart.getMonth()-1);//current cycle starts here
+
+    //filter() checks every item in an array and keeps only the ones where the callback returns true.
+    return expenses.filter(function(expense){
+        //this converts the date in string into a js object and then it can be used to check whether it lies in this cycle or the next one
+        const expenseDate=new Date(expense.date);
+        //return if this is true
+        return expenseDate>=cycleStart && expenseDate<cycleEnd;
+    });
+}
 
 function displayExpenses(){
     //clears what was previously on display and then shows the current state of the list
     expenseList.innerHTML="";
+    const currentCycleExpenses=getCurrentCycleExpenses();
     let total=0;
     expenses.forEach(function(expense){
         //Number() converts the amount from string to number as .value gives a string regardless of the input
