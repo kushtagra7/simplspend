@@ -102,9 +102,8 @@ function displayHistory() {
     filteredExpenses.forEach(function(expense) {
         const expenseItem = document.createElement("div");
         expenseItem.classList.add("history-item");
-        expenseItem.innerHTML = 
-        //adding all the details to the expense item
-        `
+        //adding details to the expenses
+        expenseItem.innerHTML = `
             <div class="history-info">
                 <p class="history-description">
                     ${expense.description}
@@ -115,11 +114,34 @@ function displayHistory() {
                 </p>
             </div>
 
-            <p class="history-amount">
-                ₹${expense.amount}
-            </p>
+            <div class="history-actions">
+                <p class="history-amount">
+                    ₹${expense.amount}
+                </p>
+
+                <button class="delete-expense-btn">
+                    Delete
+                </button>
+            </div>
         `;
-        //makes it visible on the main page
+        //we use expenseItem.query instead of document because we just want to check the expense items and not the whole document
+        const deleteButton =expenseItem.querySelector(".delete-expense-btn");
+
+        deleteButton.addEventListener("click", function() {
+            //find the index of the expense wanted to be deleted
+            const expenseIndex = expenses.indexOf(expense);
+            //splice removes the element
+            //it takes (index, number of items to be removed)
+            expenses.splice(expenseIndex, 1);
+            //then we re-save in local storage
+            localStorage.setItem(
+                "expenses",
+                JSON.stringify(expenses)
+            );
+            //then we re-call everything
+            generateCycles();
+            displayHistory();
+        });
         historyList.appendChild(expenseItem);
     });
 }

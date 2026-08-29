@@ -350,3 +350,121 @@ body {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
 }
+/* ---------- HISTORY PAGE ---------- */
+.history-page {
+    max-width: 760px;
+    margin: 70px auto 100px;
+}
+.history-page .eyebrow {
+    text-align: left;
+    margin-bottom: 14px;
+}
+.history-page > h2 {
+    margin-bottom: 42px;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+}
+/* ---------- HISTORY CONTROLS ---------- */
+.history-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    margin-bottom: 14px;
+}
+.history-controls label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    color: #77736a;
+}
+#cycle-select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d8d2c6;
+    border-radius: 12px;
+    background: #fffdf8;
+    color: #151515;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+}
+#cycle-select:focus {
+    border-color: #8e897f;
+    box-shadow: 0 0 0 3px rgba(142, 137, 127, 0.12);
+}
+/* ---------- CYCLE TOTAL ---------- */
+#cycle-total {
+    margin-bottom: 32px;
+    font-size: 14px;
+    color: #68645d;
+}
+/* ---------- HISTORY LIST ---------- */
+#history-list {
+    display: flex;
+    flex-direction: column;
+}
+.history-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 0;
+    border-bottom: 1px solid #d8d2c6;
+}
+.history-info {
+    min-width: 0;
+}
+.history-description {
+    margin-bottom: 6px;
+
+    font-size: 17px;
+    font-weight: 500;
+}
+.history-meta {
+    font-size: 13px;
+    color: #77736a;
+    text-transform: capitalize;
+}
+.history-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.history-amount {
+    font-size: 19px;
+    font-weight: 500;
+}
+/* ---------- DELETE ---------- */
+
+.delete-expense-btn {
+    padding: 7px 10px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    background: transparent;
+    color: #8a857c;
+    font-size: 12px;
+    cursor: pointer;
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+.delete-expense-btn:hover {
+    color: #151515;
+    border-color: #cfc8bb;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+}
+/* ---------- EMPTY STATE ---------- */
+.empty-history {
+    padding: 44px 0;
+    border-bottom: 1px solid #d8d2c6;
+    font-size: 14px;
+    color: #77736a;
+}
+/*NAV BAR*/
+.topbar nav a.active {
+    color: #151515;
+}
