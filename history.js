@@ -2,11 +2,32 @@ let expenses = [];
 const cycleSelect=document.getElementById("cycle-select");
 const cycleTotal=document.getElementById("cycle-total");
 const historyList = document.getElementById("history-list");
+const resetAppButton = document.getElementById("reset-app-btn");
 const savedPaymentDate=localStorage.getItem("nextPaymentDate");
 let nextPaymentDate;
 //converts string format date into js object
 if (savedPaymentDate) {
     nextPaymentDate = new Date(savedPaymentDate);
+}
+updatePaymentCycle();
+function updatePaymentCycle() {
+    if (!nextPaymentDate) {
+        return;
+    }
+    const today = new Date();
+    while (nextPaymentDate < today) {
+        const currentDay = nextPaymentDate.getDate();
+        nextPaymentDate.setMonth(
+            nextPaymentDate.getMonth() + 1
+        );
+        if (nextPaymentDate.getDate() !== currentDay) {
+            nextPaymentDate.setDate(0);
+        }
+    }
+    localStorage.setItem(
+        "nextPaymentDate",
+        nextPaymentDate.toISOString().split("T")[0]
+    );
 }
 //gets the expense from the browsers local storage(stored as string)
 const savedExpenses = localStorage.getItem("expenses");
@@ -148,6 +169,18 @@ function displayHistory() {
 
 cycleSelect.addEventListener("change", function() {
     displayHistory();
+});
+
+resetAppButton.addEventListener("click", function() {
+    const confirmReset = confirm(
+        "This will delete all expenses and setup data. Continue?"
+    );
+    if (!confirmReset) {
+        return;
+    }
+
+    localStorage.clear();
+    window.location.href = "index.html";
 });
 
 generateCycles();

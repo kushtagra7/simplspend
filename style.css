@@ -468,3 +468,16 @@ body {
 .topbar nav a.active {
     color: #151515;
 }
+/*RESET BUTTON*/
+#reset-app-btn {
+    margin-top: 24px;
+    border: none;
+    background: transparent;
+    color: #8a857c;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+#reset-app-btn:hover {
+    color: #151515;
+}

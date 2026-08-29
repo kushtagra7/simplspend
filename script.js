@@ -232,10 +232,16 @@ expenseForm.addEventListener("submit",function(event){
     const amount=document.getElementById("amount").value;
     const category=document.getElementById("category").value;
     const date=document.getElementById("date").value;
-    // console.log(description);
-    // console.log(amount);
-    // console.log(category);
-    // console.log(date);
+    if (
+    description === "" ||
+    amount === "" ||
+    category === "" ||
+    date === "" ||
+    Number(amount) <= 0
+) {
+    alert("Please fill in all expense details.");
+    return;
+}
     const expense={
         description: description,
         amount: amount,
